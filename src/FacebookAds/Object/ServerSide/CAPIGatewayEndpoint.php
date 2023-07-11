@@ -38,11 +38,30 @@ use Psr\Http\Message\ResponseInterface;
  * @category Class
  */
 class CAPIGatewayEndpoint implements CustomEndpointRequest {
-    private Client $client;
-    private string $access_key;
-    private string $endpoint_URL;
-    private bool $sendToEndpointOnly;
-    private ?Filter $filter = null;
+
+    /**
+     * @var Client $client
+     */
+    private $client;
+
+    /**
+     * @var string $access_key
+     */
+    private $access_key;
+
+    /**
+     * @var string $endpoint_URL
+     */
+    private $endpoint_URL;
+
+    /**
+     * @var bool $sendToEndpointOnly
+     */
+    private $sendToEndpointOnly;
+    /**
+     * @var Filter|null $filter
+     */
+    private $filter = null;
 
     /**
      * Constructor
