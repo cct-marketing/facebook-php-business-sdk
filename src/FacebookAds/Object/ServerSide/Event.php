@@ -50,6 +50,8 @@ class Event implements ArrayAccess {
     'data_processing_options_state' => 'int',
     'action_source' => 'string',
     'app_data' => 'FacebookAds\Object\ServerSide\AppData',
+    'advanced_measurement_table' => 'string',
+    'messaging_channel' => 'string',
   );
   /**
    * Array of attributes where the key is the local name, and the value is the original name
@@ -68,6 +70,8 @@ class Event implements ArrayAccess {
     'data_processing_options_state' => 'data_processing_options_state',
     'action_source' => 'action_source',
     'app_data' => 'app_data',
+    'advanced_measurement_table' => 'advanced_measurement_table',
+    'messaging_channel' => 'messaging_channel',
   );
 
   /**
@@ -87,6 +91,8 @@ class Event implements ArrayAccess {
     'data_processing_options_state' => 'setDataProcessingOptionsState',
     'action_source' => 'setActionSource',
     'app_data' => 'setAppData',
+    'advanced_measurement_table' => 'setAdvancedMeasurementTable',
+    'messaging_channel' => 'setMessagingChannel',
   );
   /**
    * Array of attributes to getter functions (for serialization of requests)
@@ -105,6 +111,8 @@ class Event implements ArrayAccess {
     'data_processing_options_state' => 'getDataProcessingOptionsState',
     'action_source' => 'getActionSource',
     'app_data' => 'getAppData',
+    'advanced_measurement_table' => 'getAdvancedMeasurementTable',
+    'messaging_channel' => 'getMessagingChannel',
   );
   /**
    * Associative array for storing property values
@@ -129,6 +137,8 @@ class Event implements ArrayAccess {
     $this->container['data_processing_options_state'] = isset($data['data_processing_options_state']) ? $data['data_processing_options_state'] : null;
     $this->container['action_source'] = isset($data['action_source']) ? $data['action_source'] : null;
     $this->container['app_data'] = isset($data['app_data']) ? $data['app_data'] : null;
+    $this->container['advanced_measurement_table'] = isset($data['advanced_measurement_table']) ? $data['advanced_measurement_table'] : null;
+    $this->container['messaging_channel'] = isset($data['messaging_channel']) ? $data['messaging_channel'] : null;
   }
 
   public static function paramTypes() {
@@ -396,6 +406,8 @@ class Event implements ArrayAccess {
       'action_source',
       $this->container['action_source']
     );
+    $normalized_payload['advanced_measurement_table'] = $this->getAdvancedMeasurementTable();
+    $normalized_payload['messaging_channel'] = $this->getMessagingChannel();
     $normalized_payload = array_filter($normalized_payload, function($val) { if(is_array($val)) { return true; } else { return strlen((string) $val); }});
     // Add the opt_out value back in if it was filtered out
     if ($this->getOptOut() === false) {
@@ -493,6 +505,40 @@ class Event implements ArrayAccess {
    */
   public function getAppData() {
     return $this->container['app_data'];
+  }
+
+  /**
+   * Sets advanced_measurement_table, Only used for the Advanced Measurement API in the Advanced Analytics product.
+   * @return $this
+   */
+  public function setAdvancedMeasurementTable($advanced_measurement_table) {
+    $this->container['advanced_measurement_table'] = $advanced_measurement_table;
+    return $this;
+  }
+
+  /**
+   * Gets advanced_measurement_table, Only used for the Advanced Measurement API in the Advanced Analytics product.
+   * @return string
+   */
+  public function getAdvancedMeasurementTable() {
+    return $this->container['advanced_measurement_table'];
+  }
+
+  /**
+   * Sets the messaging channel of the event.
+   * @return $this
+   */
+  public function setMessagingChannel($messaging_channel) {
+    $this->container['messaging_channel'] = $messaging_channel;
+    return $this;
+  }
+
+  /**
+   * Return the messaging channel of the event.
+   * @return string
+   */
+  public function getMessagingChannel() {
+    return $this->container['messaging_channel'];
   }
 
   /**
