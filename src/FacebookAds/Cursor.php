@@ -420,7 +420,10 @@ class Cursor implements \Iterator, \Countable, \ArrayAccess {
     $this->position = $position;
   }
 
-  public function current() : AbstractObject|bool {
+    /**
+     * @return AbstractObject|bool
+     */
+  public function current() {
     return isset($this->objects[$this->position])
       ? $this->objects[$this->position]
       : false;
@@ -503,7 +506,7 @@ class Cursor implements \Iterator, \Countable, \ArrayAccess {
    * @param mixed $offset
    * @return mixed
    */
-  public function offsetGet($offset) : mixed {
+  public function offsetGet($offset) {
     return isset($this->objects[$offset]) ? $this->objects[$offset] : null;
   }
 }

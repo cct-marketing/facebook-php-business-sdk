@@ -82,7 +82,7 @@ class EventRequest {
     $page = new Page($this->container['page_id']);
     $response = $page->createBusinessDatum(
       $fields,
-      $params,
+      $params
     );
     $event_response = new EventResponse($response->exportAllData());
     return $event_response;
